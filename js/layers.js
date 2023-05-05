@@ -77,22 +77,24 @@
                 var size = parseInt($("#kuwahara-filter-size").val());
                 imageproc.kuwahara(inputImage, outputImage, size);
                 break;
-
             // Apply gaussian
             case "gaussian":
-                ($("#gaussian-input").val() == "processed")
+                if ($("#gaussian-input").val() == "processed")
                     inputImage = processedImage;
-                var size = parseInt($("#gaussian-filter-size").val());
+                var size = parseInt($("#gaussian-kernel-size").val());
                 imageproc.gaussian(inputImage, outputImage, size);
                 break;
-            
-            // Apply gaussian
+            // Apply unsharpen
             case "unsharpen":
-                ($("#unsharpen-input").val() == "processed")
+                if ($("#unsharpen-input").val() == "processed")
                     inputImage = processedImage;
-                var size = parseInt($("#unsharpen-filter-size").val());
-                imageproc.gaussian(inputImage, outputImage, size, raduis, amount, threshold);
+                var size = parseInt($("#unsharpen-kernel-size").val());
+                var radius = parseFloat($("#unsharpen-radius").val());
+                var amount = parseInt($("#unsharpen-amount").val());
+                var threshold = parseInt($("#unsharpen-threshold").val());
+                imageproc.unsharpen(inputImage, outputImage, size, radius, amount, threshold);
                 break;
+                
         }
     }
 
