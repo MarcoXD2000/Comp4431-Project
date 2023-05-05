@@ -110,7 +110,7 @@
         console.log("Applying unsharpen mask...");
 
         /*
-         * TODO: You need to extend the unsharpen function to include different
+         * TODO: You need to extend the kuwahara function to include different
          * sizes of the filter
          *
          * You need to clearly understand the following code to make
@@ -237,23 +237,38 @@
             else
                 subtractedDetails.data[i + 2] = 0;
                 
-                
-                outputData.data[i]     = inputData.data[i] + subtractedDetails.data[i]*amount;
-                outputData.data[i + 1] = inputData.data[i + 1] + subtractedDetails.data[i + 1]*amount;
-                outputData.data[i + 2] = inputData.data[i + 2] + subtractedDetails.data[i + 2]*amount;
+            outputData.data[i] = inputData.data[i] + subtractedDetails.data[i]*amount;
+            outputData.data[i+1] = inputData.data[i + 1] + subtractedDetails.data[i + 1]*amount;
+            outputData.data[i+2] = inputData.data[i + 2] + subtractedDetails.data[i + 2]*amount;
 
-                for(var b = -parseInt(size/2); b <= radius/2; b++){
-                    for(var a = -parseInt(size/2); a <= radius/2; a ++){
-                        
+
+
+            //var i = (x + y * outputData.width) * 4;
+            for (var a = -parseInt(radius); a <= parseInt(radius); ++a){
+                for (var b = -parseInt(radius); b <= parseInt(radius); ++b){
+                    if (outputData.data[i + (a + b * outputData.width) * 4] && subtractedDetails.data[i] != 0){
+                        outputData.data[i + (a + b * outputData.width) * 4] += subtractedDetails.data[i];
+                    }
+
+                    if (outputData.data[i + 1 + (a + b * outputData.width) * 4] && subtractedDetails.data[i+1] != 0){
+                        outputData.data[i + 1 + (a + b * outputData.width) * 4] += subtractedDetails.data[i+1];
+                    }
+
+                    if (outputData.data[i + 2 + (a + b * outputData.width) * 4] && subtractedDetails.data[i+2] != 0){
+                        outputData.data[i + 2 + (a + b * outputData.width) * 4] += subtractedDetails.data[i+2];
                     }
                 }
+            }
 
-                if (outputData.data[i] > 255) outputData.data[i] = 255;
-                if (outputData.data[i+1] > 255) outputData.data[i+1] = 255;
-                if (outputData.data[i+2] > 255) outputData.data[i+2] = 255;
+            if (outputData.data[i] > 255) outputData.data[i] = 255;
+            if (outputData.data[i+1] > 255) outputData.data[i+1] = 255;
+            if (outputData.data[i+2] > 255) outputData.data[i+2] = 255;
 
         }
         //end subtract details
+
+        
+
     }
 
 }(window.imageproc = window.imageproc || {}));
