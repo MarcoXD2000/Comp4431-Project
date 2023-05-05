@@ -107,10 +107,10 @@
     }
  
     imageproc.unsharpen = function(inputData, outputData, size, radius, amount, threshold) {
-        console.log("Applying Unsharpen filter...");
+        console.log("Applying unsharpen mask...");
 
         /*
-         * TODO: You need to extend the unsharpen function to include different
+         * TODO: You need to extend the kuwahara function to include different
          * sizes of the filter
          *
          * You need to clearly understand the following code to make
@@ -161,6 +161,9 @@
             };
         }
 
+
+
+        //blur
         for (var y = 0; y < inputData.height; y++) {
             for (var x = 0; x < inputData.width; x++) {
                 var region = regionStat(x, y);
@@ -206,31 +209,48 @@
                 outputData.data[i + 2] = bValue;
             }
         }
-        var buffer = imageproc.createbuffer(outputData);
-        for (var i = 0; i < size; i++){
-            var temp;
-            temp = inputData.data[i] - buffer.data[i];
-            if(temp > threshold)
-                buffer.data[i] += temp;
-            else
-                buffer.data[i] = 0;
+        //end blur
 
-            temp = inputData.data[i+1] - buffer.data[i+1];
-            if(temp > threshold)
-                buffer.data[i+1] += temp;
+        //subtract details
+        var subtractedDetails = imageproc.createBuffer(outputData);
+
+        for (var i = 0; i < inputData.data.length; i += 4){
+
+            //R
+            outputData.data[i] = inputData.data[i] - outputData.data[i];
+            if (outputData.data[i] > threshold)
+                subtractedDetails.data[i] = outputData.data[i];
             else
-                buffer.data[i+1] = 0;
-            
-            temp = inputData.data[i+2] - buffer.data[i+2];
-            if(temp > threshold)
-                buffer.data[i+2] += temp;
+                subtractedDetails.data[i] = 0;
+
+            //G
+            outputData.data[i + 1] = inputData.data[i + 1] - outputData.data[i + 1];
+            if (outputData.data[i + 1] > threshold)
+                subtractedDetails.data[i + 1] = outputData.data[i + 1];
             else
-                buffer.data[i+2] = 0;
-            
-            outputData.data[i] = inputData.data[i] * buffer.data[i];
-            outputData.data[i+1] = inputData.data[i] * buffer.data[i+1];
-            outputData.data[i+2] = inputData.data[i] * buffer.data[i+2];   
+                subtractedDetails.data[i + 1] = 0;
+
+            //B
+            outputData.data[i + 2] = inputData.data[i + 2] - outputData.data[i + 2];
+            if (outputData.data[i + 2] > threshold)
+                subtractedDetails.data[i + 2] = outputData.data[i + 2];
+            else
+                subtractedDetails.data[i + 2] = 0;
+                
+                
+                outputData.data[i]     = inputData.data[i] + subtractedDetails.data[i]*amount;
+                outputData.data[i + 1] = inputData.data[i + 1] + subtractedDetails.data[i + 1]*amount;
+                outputData.data[i + 2] = inputData.data[i + 2] + subtractedDetails.data[i + 2]*amount;
+
+                if (outputData.data[i] > 255) outputData.data[i] = 255;
+                if (outputData.data[i+1] > 255) outputData.data[i+1] = 255;
+                if (outputData.data[i+2] > 255) outputData.data[i+2] = 255;
+
         }
+        //end subtract details
+
+        
+
     }
 
 }(window.imageproc = window.imageproc || {}));
