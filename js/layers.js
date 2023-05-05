@@ -79,7 +79,22 @@
                 break;
             // Apply gaussian
             case "gaussian":
+                if ($("#gaussian-input").val() == "processed")
+                    inputImage = processedImage;
+                var size = parseInt($("#gaussian-kernel-size").val());
+                imageproc.gaussian(inputImage, outputImage, size);
                 break;
+            // Apply unsharpen
+            case "unsharpen":
+                if ($("#unsharpen-input").val() == "processed")
+                    inputImage = processedImage;
+                var size = parseInt($("#unsharpen-kernel-size").val());
+                var radius = parseFloat($("#unsharpen-radius").val());
+                var amount = parseInt($("#unsharpen-amount").val());
+                var threshold = parseInt($("#unsharpen-threshold").val());
+                imageproc.unsharpen(inputImage, outputImage, size, radius, amount, threshold);
+                break;
+                
         }
     }
 

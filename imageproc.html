@@ -335,7 +335,7 @@
                             <div class="row">
                                 <div class="col-3">
                                     <label for="gaussian-input">Input:</label>
-                                    <select class="custom-select" id="gaussian-blur-input">
+                                    <select class="custom-select" id="gaussian-input">
                                         <option value="original">Original Image</option>
                                         <option value="processed">Processed Image</option>
                                     </select>
@@ -344,7 +344,7 @@
                                     <label for="gaussian-kernel-size">Kernel size:</label>
                                     <div class="input-group">
                                         <div class="row flex-fill align-items-center mx-0 px-2 border rounded-left">
-                                            <input class="custom-range" id="gaussian-blur-kernel-size" type="range" value="3" min="3" max="11" step="4"
+                                            <input class="custom-range" id="gaussian-kernel-size" type="range" value="3" min="3" max="11" step="4"
                                              oninput="$(this).parents('.input-group').find('.input-group-text > span').html($(this).val())">
                                         </div>
                                         <div class="input-group-append"><span class="input-group-text"><span>3</span> &times; <span>3</span></span></div>
@@ -519,5 +519,8 @@
     <script src="js/outline.js"></script>
     <script src="js/main.js"></script>
     <script src="js/layers.js"></script>
+    <script src="js/unsharpenmask.js"></script>
+
+
 </body>
 </html>
