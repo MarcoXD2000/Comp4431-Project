@@ -90,8 +90,6 @@
                             <li><a class="dropdown-item" href="#no-op"><i>Do Nothing</i></a></li>
                             <li><a class="dropdown-item" href="#blur">Blur</a></li>
                             <li><a class="dropdown-item" href="#kuwahara">Kuwahara Filter</a></li>
-                            <li><a class="dropdown-item" href="#gaussian">Gaussian Blur</a></li>
-                            <li><a class="dropdown-item" href="#unsharpen">Unsharpen Mask</a></li>
                         </ul>
                     </li>
 
@@ -300,58 +298,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Gaussian -->
-                    <div class="tab-pane" id="gaussian">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-3">
-                                    <label for="gaussian-input">Input:</label>
-                                    <select class="custom-select" id="gaussian-input">
-                                        <option value="original">Original Image</option>
-                                        <option value="processed">Processed Image</option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <label for="gaussian-kernel-size">Kernel size:</label>
-                                    <div class="input-group">
-                                        <div class="row flex-fill align-items-center mx-0 px-2 border rounded-left">
-                                            <input class="custom-range" id="gaussian-kernel-size" type="range" value="4" min="3" max="11" step="4"
-                                             oninput="$(this).parents('.input-group').find('.input-group-text > span').html($(this).val())">
-                                        </div>
-                                        <div class="input-group-append"><span class="input-group-text"><span>3</span> &times; <span>3</span></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Unsharpen -->
-                    <div class="tab-pane" id="unsharpen">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-3">
-                                    <label for="unsharpen-input">Input:</label>
-                                    <select class="custom-select" id="unsharpen-input">
-                                        <option value="original">Original Image</option>
-                                        <option value="processed">Processed Image</option>
-                                    </select>
-                                </div>
-                                <div class="col-3">
-                                    <label for="unsharpen-kernel-size">Kernel size:</label>
-                                    <div class="input-group">
-                                        <div class="row flex-fill align-items-center mx-0 px-2 border rounded-left">
-                                            <input class="custom-range" id="unsharpen-kernel-size" type="range" value="4" min="3" max="11" step="4"
-                                             oninput="$(this).parents('.input-group').find('.input-group-text > span').html($(this).val())">
-                                        </div>
-                                        <div class="input-group-append"><span class="input-group-text"><span>3</span> &times; <span>3</span></span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
 
                     <!-- Kuwahara filter -->
                     <div class="tab-pane" id="kuwahara">
