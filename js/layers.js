@@ -79,7 +79,7 @@
                 break;
 
             // Apply gaussian
-            case "gaussian-blur":
+            case "gaussian":
                 ($("#gaussian-input").val() == "processed")
                     inputImage = processedImage;
                 var size = parseInt($("#gaussian-filter-size").val());
@@ -87,11 +87,11 @@
                 break;
             
             // Apply gaussian
-            case "unsharpen-blur":
-                ($("#gaussian-input").val() == "processed")
+            case "unsharpen":
+                ($("#unsharpen-input").val() == "processed")
                     inputImage = processedImage;
-                var size = parseInt($("#gaussian-filter-size").val());
-                imageproc.gaussian(inputImage, outputImage, size);
+                var size = parseInt($("#unsharpen-filter-size").val());
+                imageproc.gaussian(inputImage, outputImage, size, raduis, amount, threshold);
                 break;
         }
     }

@@ -2,10 +2,10 @@
     "use strict";
 
     /*
-     * Apply unsharpen to the input data
+     * Apply gaussian to the input data
      */
-    imageproc.unsharpen = function(inputData, outputData, kernelSize, radius, amount, threshold) {
-        console.log("Applying unsharpen...");
+    imageproc.gaussian = function(inputData, outputData, kernelSize) {
+        console.log("Applying gaussian...");
 
         // You are given a 3x3 kernel but you need to create a proper kernel
         // using the given kernel size
