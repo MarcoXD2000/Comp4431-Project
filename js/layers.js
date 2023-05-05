@@ -77,6 +77,22 @@
                 var size = parseInt($("#kuwahara-filter-size").val());
                 imageproc.kuwahara(inputImage, outputImage, size);
                 break;
+
+            // Apply gaussian
+            case "gaussian-blur":
+                ($("#gaussian-input").val() == "processed")
+                    inputImage = processedImage;
+                var size = parseInt($("#gaussian-filter-size").val());
+                imageproc.gaussian(inputImage, outputImage, size);
+                break;
+            
+            // Apply gaussian
+            case "unsharpen-blur":
+                ($("#gaussian-input").val() == "processed")
+                    inputImage = processedImage;
+                var size = parseInt($("#gaussian-filter-size").val());
+                imageproc.gaussian(inputImage, outputImage, size);
+                break;
         }
     }
 
