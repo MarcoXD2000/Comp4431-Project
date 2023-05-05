@@ -77,6 +77,9 @@
                 var size = parseInt($("#kuwahara-filter-size").val());
                 imageproc.kuwahara(inputImage, outputImage, size);
                 break;
+            // Apply gaussian
+            case "gaussian":
+                break;
         }
     }
 
